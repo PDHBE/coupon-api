@@ -34,7 +34,7 @@ public class BaseTest {
     private final String api;
 
     @Autowired
-    private MockMvc mockMvc;
+    protected MockMvc mockMvc;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

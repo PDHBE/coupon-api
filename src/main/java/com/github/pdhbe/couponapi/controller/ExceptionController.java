@@ -5,6 +5,7 @@ import com.github.pdhbe.couponapi.domain.dto.ResponseBodyDto;
 import com.github.pdhbe.couponapi.service.CannotDownloadCouponException;
 import com.github.pdhbe.couponapi.service.CannotUseCouponException;
 import com.github.pdhbe.couponapi.service.DuplicatedCodeException;
+import com.github.pdhbe.couponapi.service.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,13 @@ public class ExceptionController {
     /**
      * Custom Exception
      */
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ResponseBodyDto> handleNotFoundException(NotFoundException notFoundException) {
+        ErrorInfo errorInfo = new ErrorInfo(HttpStatus.NOT_FOUND.value(), notFoundException.getMessage());
+        ResponseBodyDto responseBodyDto = createResponseBodyDto(errorInfo);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBodyDto);
+    }
 
     @ExceptionHandler(CannotUseCouponException.class)
     public ResponseEntity<ResponseBodyDto> handleCannotUseCouponException(CannotUseCouponException cannotUseCouponException) {

@@ -22,6 +22,9 @@ public class CouponService {
         if(couponGroup == null){
             throw new NotFoundException();
         }
+        if(isNotIssuer(user_id,code)){
+            throw new NotIssuerException("Cannot Download Coupon Because Not Issuer.");
+        }
         if(!couponGroup.isPublished()){
             throw new CannotDownloadCouponException("Cannot Download Coupon Because Status Is Not Published.");
         }
@@ -42,11 +45,11 @@ public class CouponService {
     @Transactional
     public Coupon use(String user_id, String code) {
         Coupon coupon = couponRepository.findByUserIdAndCode(user_id, code);
-        if(isNotIssuer(user_id,code)){
-            throw new NotIssuerException("Cannot Use Coupon Because Not Issuer.");
-        }
         if(coupon == null){
             throw new NotFoundException();
+        }
+        if(isNotIssuer(user_id,code)){
+            throw new NotIssuerException("Cannot Use Coupon Because Not Issuer.");
         }
         if(!coupon.isIssued()){
             throw new CannotUseCouponException("Cannot Use Coupon Because Coupon Is Not Issued.");
