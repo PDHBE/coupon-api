@@ -96,7 +96,7 @@ public class CouponControllerTest extends BaseTest {
         @Test
         @DisplayName("성공")
         void successDefault() throws Exception {
-            success(reqPost("/CP3000/download", "user1"));
+            success(reqPost("/CPRemainedOne/download", "user1"));
         }
 
         @Test

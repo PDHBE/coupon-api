@@ -193,7 +193,7 @@ public class CouponGroupControllerTest extends BaseTest {
         couponGroupMap.put("amount", 1000);
         couponGroupMap.put("max_count", 100);
         couponGroupMap.put("valid_from_dt", "2021-01-01T00:00:00.000Z");
-        couponGroupMap.put("valid_to_dt", "2021-12-31T23:59:59.000Z");
+        couponGroupMap.put("valid_to_dt", "2099-12-31T23:59:59.000Z");
         return new JSONObject(couponGroupMap);
     }
 }
